@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 interface ProjectItemProps {
   data: {
@@ -46,7 +47,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ data }) => {
   return (
     <div className="project-card">
       {/* 프로젝트 커버 이미지 */}
-      <img src={coverImageUrl} alt={이름.title[0].plain_text} className="w-full h-48 object-cover" />
+      <Image src={coverImageUrl} alt={이름.title[0].plain_text} className="w-full h-48 object-cover" />
 
       <div className="p-6">
         {/* 프로젝트 이름 */}

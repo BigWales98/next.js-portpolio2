@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from 'react'
+//import React, { useRef } from 'react'
 import Lottie from 'react-lottie-player'
 
 // Alternatively:
@@ -9,7 +9,7 @@ import Lottie from 'react-lottie-player'
 import lottieJson from './Animation.json'
 
 export default function Animation() {
-    const ref = useRef();
+    //const ref = useRef();
 
   return (
     <Lottie
