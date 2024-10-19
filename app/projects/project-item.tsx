@@ -5,9 +5,9 @@ interface ProjectItemProps {
   data: {
     id: string;
     cover?: {
-        external?: {
-          url: string;
-        };
+      external?: {
+        url: string;
+      };
     };
     properties: {
       이름: {
@@ -15,18 +15,18 @@ interface ProjectItemProps {
           plain_text: string;
         }[];
       };
-      Description: {
-        rich_text: {
+      Description?: {
+        rich_text?: {
           plain_text: string;
         }[];
       };
-      태그: {
+      태그?: {
         multi_select: {
           name: string;
           color: string;
         }[];
       };
-      Workperiod: {
+      Workperiod?: {
         date: {
           start: string;
           end: string;
@@ -47,16 +47,28 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ data }) => {
   return (
     <div className="project-card">
       {/* 프로젝트 커버 이미지 */}
-      <Image src={coverImageUrl} alt={이름.title[0].plain_text} className="w-full h-48 object-cover" />
+      <Image 
+        src={coverImageUrl} 
+        alt={이름.title[0].plain_text} 
+        className="w-full h-48 object-cover"
+        width={500}
+        height={300}
+        priority={true}
+        />
 
       <div className="p-6">
         {/* 프로젝트 이름 */}
         <h2 className="text-2xl font-bold mb-2">{이름.title[0].plain_text}</h2>
 
         {/* 프로젝트 설명 (조건부 렌더링) */}
-        {Description && (
-          <p className="text-gray-600 dark:text-gray-300 mb-4">{Description.rich_text[0]?.plain_text || '설명이 없습니다.'}</p>
+        {Description?.rich_text && Description.rich_text.length > 0 ? (
+          <p className="text-gray-600 dark:text-gray-300 mb-4">
+            {Description.rich_text[0]?.plain_text || '설명이 없습니다.'}
+          </p>
+        ) : (
+          <p>설명이 없습니다.</p>
         )}
+
 
         {/* 프로젝트 기간 (조건부 렌더링) */}
         {Workperiod && (

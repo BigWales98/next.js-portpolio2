@@ -16,7 +16,7 @@ interface Project {
       }[];
     };
     Description?: {
-      rich_text: {
+      rich_text?: {
         plain_text: string;
       }[];
     };
@@ -38,7 +38,7 @@ interface Project {
   };
 }
 
-// 서버에서 데이터를 가져오는 비동기 함수 (getServerSideProps 방식 대신)
+// 서버에서 데이터를 가져오는 비동기 함수
 async function getProjects(): Promise<Project[]> {
   const options = {
     method: 'POST',
