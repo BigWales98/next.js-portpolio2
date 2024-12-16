@@ -65,7 +65,7 @@ async function getProjects(): Promise<Project[]> {
       page_size: 100,
     }),
     next: {
-      revalidate: 60
+      revalidate: 30
     }
   };
 

@@ -23,6 +23,7 @@ const nextConfig = {
             hostname: 'png.pngtree.com'  // 새로 추가된 이미지 도메인
         }
       ],
+      domains: ['res.cloudinary.com'],
     },
     
     env: {

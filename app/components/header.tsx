@@ -26,7 +26,11 @@ export default function Header() {
             <Link href="https://open.kakao.com/o/gdzReiVg" className="mr-5 hover:text-gray-900">
                 연락하기
             </Link>
-
+            
+            <Link href="/gallery" className="mr-5 hover:text-gray-900">
+            갤러리
+            </Link>
+            
             <Link 
               href="https://next-js-portfolio-seven-plum.vercel.app/" 
               className="mr-5 hover:text-gray-900"
