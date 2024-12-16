@@ -1,7 +1,12 @@
+'use client'
+
 import React from 'react'
-import Animation from './animation'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
+const Animation = dynamic(() => import('./animation'), {
+  ssr: false
+})
 export default function Hero() {
   return (
     <div className='flex flex-col items-center justify-between md:flex-row'>
