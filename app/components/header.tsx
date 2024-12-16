@@ -28,7 +28,7 @@ export default function Header() {
             </Link>
             
             <Link href="/gallery" className="mr-5 hover:text-gray-900">
-            갤러리
+                갤러리
             </Link>
             
             <Link 
@@ -38,6 +38,15 @@ export default function Header() {
               rel="noopener noreferrer"
             >
                 Midterm
+            </Link>
+
+            <Link 
+              href="https://finalteam.vercel.app/" 
+              className="mr-5 hover:text-gray-900"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+                팀플
             </Link>
           </nav>
           {/*다크모드 토글 버튼 작업공간 */}
