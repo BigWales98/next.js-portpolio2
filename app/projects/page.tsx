@@ -4,6 +4,13 @@ import ProjectItem from './project-item'; // 상대경로 조정
 // Project 인터페이스 선언
 interface Project {
   id: string;
+  icon?: {
+    type: 'emoji' | 'external';
+    emoji?: string;
+    external?: {
+      url: string;
+    };
+  };
   cover?: {
     external?: {
       url: string;
@@ -57,6 +64,9 @@ async function getProjects(): Promise<Project[]> {
       ],
       page_size: 100,
     }),
+    next: {
+      revalidate: 60
+    }
   };
 
   const res = await fetch(`https://api.notion.com/v1/databases/${process.env.NOTION_DATABASE_ID}/query`, options);
