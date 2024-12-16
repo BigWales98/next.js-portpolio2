@@ -26,6 +26,15 @@ export default function Header() {
             <Link href="https://open.kakao.com/o/gdzReiVg" className="mr-5 hover:text-gray-900">
                 연락하기
             </Link>
+
+            <Link 
+              href="https://next-js-portfolio-seven-plum.vercel.app/" 
+              className="mr-5 hover:text-gray-900"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+                Midterm
+            </Link>
           </nav>
           {/*다크모드 토글 버튼 작업공간 */}
           <DarkModeToggleButton />
