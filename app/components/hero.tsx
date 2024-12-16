@@ -22,7 +22,7 @@ export default function Hero() {
                   올해(2024) KISIA에서 주관하는 S-개발자 2기 수료후
                   (사실, 내일 수료식입니다~),
                   폭넓은 역량 확보를 위해 1주일에 1개 프로젝트 이상 
-                  깃허브 업로드가 목표이지만... 적응하기까진 좀 걸릴 것 같습니다... ㅠㅠ
+                  깃허브 업로드가 목표이지만... 솔직한 심정으로 점점 귀찮아진다는게 함정... ㅠㅠ
                 </p>
             <div className="flex justify-center">
               <Link href="/projects" className="btn-project">
