@@ -1,16 +1,15 @@
 "use client";
 
-//import React, { useRef } from 'react'
-import Lottie from 'react-lottie-player'
+import dynamic from 'next/dynamic'
 
-// Alternatively:
-// import Lottie from 'react-lottie-player/dist/LottiePlayerLight'
+// Lottie를 동적으로 불러오기
+const Lottie = dynamic(() => import('react-lottie-player'), {
+  ssr: false // 서버 사이드 렌더링 비활성화
+})
 
 import lottieJson2 from './Animation2.json'
 
 export default function Animation2() {
-    //const ref = useRef();
-
   return (
     <Lottie
       loop
