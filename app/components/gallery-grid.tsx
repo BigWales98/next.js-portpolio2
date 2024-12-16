@@ -20,7 +20,9 @@ export default function GalleryGrid() {
 
   const fetchImages = async () => {
     try {
-      const res = await fetch('/api/gallery');
+      const res = await fetch('/api/gallery', {
+        cache: 'no-store'
+      });
       const data = await res.json();
       if (Array.isArray(data)) {
         setImages(data as CloudinaryImage[]);
