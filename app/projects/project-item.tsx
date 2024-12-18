@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { FaGithub } from 'react-icons/fa';
 
 interface ProjectItemProps {
   data: {
@@ -35,12 +36,15 @@ interface ProjectItemProps {
       Github?: {
         url: string;
       };
+      Vercel?: {
+        url: string;
+      };
     };
   };
 }
 
 const ProjectItem: React.FC<ProjectItemProps> = ({ data }) => {
-  const { 이름, Description, 태그, Workperiod, Github } = data.properties;
+  const { 이름, Description, 태그, Workperiod, Github, Vercel } = data.properties;
   const coverImageUrl = data.cover?.external?.url || '/images/default-project-cover.jpg';
   
   return (
@@ -105,14 +109,31 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ data }) => {
           </div>
         )}
 
-        {/* Github 링크 */}
-        {Github?.url && (
-          <div className='mt-4'>
-            <a href={Github.url} target='_blank' rel='noopener noreferrer' className='text-blue-500 hover:underline'>
-              GitHub 바로가기
+        {/* Github & Vercel 링크 */}
+        <div className='mt-4 flex gap-4'>
+          {Github?.url && (
+            <a 
+              href={Github.url} 
+              target='_blank' 
+              rel='noopener noreferrer'
+              className='text-blue-500 hover:underline flex items-center gap-2'
+            >
+              <FaGithub size={20} />
+              GitHub
             </a>
-          </div>
-        )}
+          )}
+          {Vercel?.url && (
+            <a 
+              href={Vercel.url} 
+              target='_blank' 
+              rel='noopener noreferrer'
+              className='text-black hover:underline flex items-center gap-2'
+            >
+              <svg height="20" viewBox="0 0 76 65" fill="currentColor"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z"></path></svg>
+              Vercel
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );
