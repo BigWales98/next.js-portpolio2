@@ -113,7 +113,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ data }) => {
         <div className='mt-4 flex gap-4'>
           {Github?.url && (
             <a 
-              href={Github.url} 
+              href={Github.url.startsWith('http') ? Github.url : `https://${Github.url}`}
               target='_blank' 
               rel='noopener noreferrer'
               className='text-blue-500 hover:underline flex items-center gap-2'
@@ -124,12 +124,14 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ data }) => {
           )}
           {Vercel?.url && (
             <a 
-              href={Vercel.url} 
-              target='_blank' 
-              rel='noopener noreferrer'
-              className='text-black hover:underline flex items-center gap-2'
+              href={Vercel.url.startsWith('http') ? Vercel.url : `https://${Vercel.url}`}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-black hover:underline flex items-center gap-2"
             >
-              <svg height="20" viewBox="0 0 76 65" fill="currentColor"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z"></path></svg>
+              <svg height="20" viewBox="0 0 76 65" fill="currentColor">
+                <path d="M37.5274 0L75.0548 65H0L37.5274 0Z"></path>
+              </svg>
               Vercel
             </a>
           )}
