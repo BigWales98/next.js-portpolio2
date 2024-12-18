@@ -25,8 +25,8 @@ export default function Hero() {
                   깃허브 업로드가 목표이지만... 솔직한 심정으로 점점 귀찮아진다는게 함정... ㅠㅠ
                 </p>
             <div className="flex justify-center">
-              <Link href="/projects" className="btn-project">
-                  프로젝트 보러가기
+              <Link href="/menu" className="btn-project">
+                  시작하기
               </Link>
             </div>
         </div>

@@ -56,3 +56,16 @@ p {
     -webkit-text-fill-color: transparent;
     animation: rainbow 5s ease infinite;
   }
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.hover\:shadow-glow:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+}
+
+.transform-gpu {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
