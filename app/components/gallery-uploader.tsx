@@ -25,6 +25,7 @@ export default function GalleryUploader({ onUploadSuccess }: GalleryUploaderProp
               method: 'POST'
             }).then(() => {
               onUploadSuccess();
+              window.location.reload();
             });
           }
         }}

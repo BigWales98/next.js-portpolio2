@@ -45,6 +45,7 @@ export default function GalleryGrid() {
           method: 'POST'
         });
         await fetchImages();
+        window.location.reload();
       } else {
         alert('삭제 권한이 없습니다.');
       }
