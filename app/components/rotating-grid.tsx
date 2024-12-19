@@ -10,37 +10,43 @@ const menuItems = [
     href: 'https://next-js-portfolio-seven-plum.vercel.app/',
     icon: <FaGraduationCap size={25} />,
     title: 'Midterm',
-    angle: -90
+    angle: -90,
+    isExternal: true
   },
   {
     href: 'https://finalteam.vercel.app/',
     icon: <FaUsers size={25} />,
     title: '팀플',
-    angle: -30
+    angle: -30,
+    isExternal: true
   },
   {
     href: '/projects',
     icon: <FaProjectDiagram size={25} />,
     title: '프로젝트',
-    angle: 30
+    angle: 30,
+    isExternal: false
   },
   {
     href: 'https://open.kakao.com/o/gdzReiVg',
     icon: <FaPhoneAlt size={25} />,
     title: '연락하기',
-    angle: 90
+    angle: 90,
+    isExternal: true
   },
   {
     href: '/gallery',
     icon: <FaImages size={25} />,
     title: '갤러리',
-    angle: 150
+    angle: 150,
+    isExternal: false
   },
   {
     href: 'https://github.com/BigWales98',
     icon: <FaGithub size={25} />,
     title: 'GitHub',
-    angle: 210
+    angle: 210,
+    isExternal: true
   }
 ];
 
@@ -48,12 +54,19 @@ export default function RotatingGrid() {
   const radius = 180;
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
 
-  const handleItemClick = async (index: number, href: string) => {
+  const handleItemClick = async (index: number, href: string, isExternal: boolean) => {
     setSelectedItem(index);
     
     // 애니메이션 후 페이지 이동
     await new Promise(resolve => setTimeout(resolve, 800));
-    window.location.href = href;
+    
+    if (isExternal) {
+      // 외부 링크는 새 탭에서 열기
+      window.open(href, '_blank');
+    } else {
+      // 내부 링크는 현재 탭에서 이동
+      window.location.href = href;
+    }
   };
 
   return (
@@ -91,7 +104,7 @@ export default function RotatingGrid() {
                 top: `calc(50% + ${y}px)`,
                 transform: 'translate(-50%, -50%)'
               }}
-              onClick={() => handleItemClick(index, item.href)}
+              onClick={() => handleItemClick(index, item.href, item.isExternal)}
             >
               <div 
                 className={`w-20 h-20 bg-[#f8f9ff] rounded-full flex flex-col items-center justify-center cursor-pointer transition-all
