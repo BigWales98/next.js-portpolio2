@@ -17,6 +17,7 @@ export default function GalleryGrid() {
   const [images, setImages] = useState<CloudinaryImage[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminToken, setAdminToken] = useState('');
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
 
   const fetchImages = async () => {
     try {
@@ -34,24 +35,37 @@ export default function GalleryGrid() {
     }
   };
 
-  const deleteImage = async (publicId: string) => {
+  const deleteSelectedImages = async () => {
     try {
-      const res = await fetch('/api/gallery/delete', {
-        method: 'DELETE',
-        body: JSON.stringify({ publicId, adminToken }),
-      });
-      if (res.ok) {
-        await fetch(`/api/gallery/revalidate?token=${process.env.NEXT_PUBLIC_REVALIDATION_TOKEN}`, {
-          method: 'POST'
+      for (const publicId of selectedImages) {
+        const res = await fetch('/api/gallery/delete', {
+          method: 'DELETE',
+          body: JSON.stringify({ publicId, adminToken }),
         });
-        await fetchImages();
-        window.location.reload();
-      } else {
-        alert('삭제 권한이 없습니다.');
+        if (!res.ok) {
+          alert('삭제 권한이 없습니다.');
+          return;
+        }
       }
+      
+      // 모든 이미지 삭제 후 한 번만 재검증 및 새로고침
+      await fetch(`/api/gallery/revalidate?token=${process.env.NEXT_PUBLIC_REVALIDATION_TOKEN}`, {
+        method: 'POST'
+      });
+      await fetchImages();
+      window.location.reload();
+      setSelectedImages([]);
     } catch (error) {
-      console.error('Failed to delete image:', error);
+      console.error('Failed to delete images:', error);
     }
+  };
+
+  const toggleImageSelection = (publicId: string) => {
+    setSelectedImages(prev => 
+      prev.includes(publicId) 
+        ? prev.filter(id => id !== publicId)
+        : [...prev, publicId]
+    );
   };
 
   const verifyAdminToken = async (token: string) => {
@@ -92,6 +106,14 @@ export default function GalleryGrid() {
         {isAdmin && <span className="ml-2 text-green-500">✓ 관리자 확인됨</span>}
       </div>
       <GalleryUploader onUploadSuccess={fetchImages} />
+      {isAdmin && selectedImages.length > 0 && (
+        <button
+          onClick={deleteSelectedImages}
+          className="mb-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          선택한 이미지 삭제 ({selectedImages.length}개)
+        </button>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {images.map((image) => (
           <div key={image.public_id} className="relative aspect-square group">
@@ -102,12 +124,14 @@ export default function GalleryGrid() {
               className="object-cover rounded-lg"
             />
             {isAdmin && (
-              <button
-                onClick={() => deleteImage(image.public_id)}
-                className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                삭제
-              </button>
+              <div className="absolute top-2 right-2 flex gap-2">
+                <input
+                  type="checkbox"
+                  checked={selectedImages.includes(image.public_id)}
+                  onChange={() => toggleImageSelection(image.public_id)}
+                  className="w-5 h-5 cursor-pointer"
+                />
+              </div>
             )}
           </div>
         ))}
