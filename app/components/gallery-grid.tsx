@@ -40,6 +40,9 @@ export default function GalleryGrid() {
         body: JSON.stringify({ publicId, adminToken }),
       });
       if (res.ok) {
+        await fetch(`/api/gallery/revalidate?token=${process.env.NEXT_PUBLIC_REVALIDATION_TOKEN}`, {
+          method: 'POST'
+        });
         await fetchImages();
       } else {
         alert('삭제 권한이 없습니다.');

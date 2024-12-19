@@ -21,7 +21,11 @@ export default function GalleryUploader({ onUploadSuccess }: GalleryUploaderProp
           console.log('Upload results:', results);
           if (results.info && typeof results.info === 'object') {
             console.log('Upload successful:', results.info);
-            onUploadSuccess();
+            fetch(`/api/gallery/revalidate?token=${process.env.NEXT_PUBLIC_REVALIDATION_TOKEN}`, {
+              method: 'POST'
+            }).then(() => {
+              onUploadSuccess();
+            });
           }
         }}
         onError={(error) => {
