@@ -21,7 +21,8 @@ export default function GalleryGrid() {
   const fetchImages = async () => {
     try {
       const res = await fetch('/api/gallery', {
-        cache: 'no-store'
+        cache: 'no-store',
+        next: { revalidate: 0 }
       });
       const data = await res.json();
       if (Array.isArray(data)) {
